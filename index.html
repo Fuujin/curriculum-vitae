@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hagen Maletzki // RUNNER FILE // CLASSIFIED</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #090a0d;
+      --panel:       #0f1117;
+      --card:        #13151c;
+      --border:      #22252f;
+      --border-dim:  #1a1c24;
+      --accent:      #c41e3a;
+      --accent-dim:  rgba(196,30,58,0.1);
+      --orange:      #d45f00;
+      --text:        #c8ccd6;
+      --text-bright: #eceef3;
+      --text-muted:  #454a5e;
+      --mono:        'Share Tech Mono', monospace;
+      --sans:        'Rajdhani', sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      background-image:
+        radial-gradient(rgba(196,30,58,0.05) 1px, transparent 1px);
+      background-size: 22px 22px;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 210mm;
+      margin: 2rem auto;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+    }
+
+    /* ─────────────── HEADER ─────────────── */
+    .header {
+      padding: 1.8rem 2rem 1.5rem;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 1rem;
+    }
+
+    .runner-name {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--text-bright);
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .runner-archetype {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      margin-top: 0.45rem;
+      text-transform: uppercase;
+    }
+
+    .header-contact {
+      text-align: right;
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      color: var(--text-muted);
+      line-height: 2;
+    }
+
+    .header-contact a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .header-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.6rem;
+      margin-top: 1.3rem;
+    }
+
+    .stat-box {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      padding: 0.55rem 0.7rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px; height: 100%;
+      background: var(--accent);
+    }
+
+    .stat-box::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 6px; height: 6px;
+      border-right: 1px solid var(--accent);
+      border-bottom: 1px solid var(--accent);
+    }
+
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.54rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: block;
+    }
+
+    .stat-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      line-height: 1.2;
+      margin-top: 0.1rem;
+    }
+
+    .stat-unit {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--accent);
+      display: block;
+      margin-top: 0.05rem;
+    }
+
+    /* ─────────────── LAYOUT ─────────────── */
+    .body-grid {
+      display: grid;
+      grid-template-columns: 1fr 195px;
+    }
+
+    .main {
+      padding: 1.5rem 1.8rem 1.5rem 2rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .sidebar {
+      padding: 1.4rem 1.3rem;
+      background: var(--card);
+    }
+
+    /* ─────────────── SECTIONS ─────────────── */
+    .section { margin-bottom: 1.35rem; }
+
+    .section-title {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title::before { content: '▸'; font-size: 0.5rem; }
+
+    /* ─────────────── PROFILE ─────────────── */
+    .profile-text {
+      font-size: 0.83rem;
+      color: var(--text);
+      line-height: 1.7;
+      border-left: 2px solid var(--accent);
+      padding-left: 0.8rem;
+      font-style: italic;
+    }
+
+    /* ─────────────── RUNS (jobs) ─────────────── */
+    .run { margin-bottom: 1.1rem; }
+    .run:last-child { margin-bottom: 0; }
+
+    .run-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 0.5rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .run-title-line {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .run-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .run-badge {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.12em;
+      padding: 0.1rem 0.35rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-transform: uppercase;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    .run-period {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      border: 1px solid var(--border);
+      padding: 0.1rem 0.4rem;
+    }
+
+    .run-corp {
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      color: var(--orange);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
+
+    .run-brief {
+      font-size: 0.79rem;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 0.4rem;
+    }
+
+    .run-objectives {
+      list-style: none;
+      padding: 0;
+    }
+
+    .run-objectives li {
+      font-size: 0.76rem;
+      color: var(--text);
+      line-height: 1.55;
+      padding-left: 1rem;
+      position: relative;
+      margin-bottom: 0.2rem;
+    }
+
+    .run-objectives li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.58rem;
+      top: 0.2rem;
+    }
+
+    .run-divider {
+      border: none;
+      border-top: 1px solid var(--border-dim);
+      margin: 0.9rem 0;
+    }
+
+    /* ─────────────── PRIOR RUNS ─────────────── */
+    .prior-run {
+      font-size: 0.72rem;
+      color: var(--text);
+      margin-bottom: 0.28rem;
+      line-height: 1.5;
+      padding-left: 0.7rem;
+      border-left: 1px solid var(--border);
+    }
+
+    .prior-run strong { color: var(--text-bright); font-weight: 600; }
+    .prior-run .corp { font-family: var(--mono); font-size: 0.62rem; color: var(--orange); }
+
+    /* ─────────────── PROJECTS ─────────────── */
+    .project-item { margin-bottom: 0.45rem; }
+
+    .project-name {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .project-period {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      margin-left: 0.35rem;
+    }
+
+    .project-desc {
+      font-size: 0.74rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* ─────────────── SIDEBAR: SKILLS ─────────────── */
+    .skill-group { margin-bottom: 0.6rem; }
+
+    .skill-group-label {
+      font-family: var(--mono);
+      font-size: 0.56rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      margin-bottom: 0.22rem;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 0.2rem; }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.1rem 0.38rem;
+    }
+
+    /* ─────────────── SIDEBAR: LANGUAGES ─────────────── */
+    .lang-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.74rem;
+      margin-bottom: 0.22rem;
+      padding-bottom: 0.22rem;
+      border-bottom: 1px solid var(--border-dim);
+    }
+
+    .lang-item:last-child { border-bottom: none; }
+    .lang-name { font-weight: 600; color: var(--text-bright); }
+    .lang-level { font-family: var(--mono); font-size: 0.58rem; color: var(--text-muted); }
+
+    /* ─────────────── SIDEBAR: EDU / CERTS ─────────────── */
+    .edu-item { font-size: 0.74rem; margin-bottom: 0.4rem; line-height: 1.45; }
+    .edu-item strong { font-weight: 600; color: var(--text-bright); display: block; }
+    .edu-item span { font-family: var(--mono); color: var(--text-muted); font-size: 0.62rem; display: block; }
+
+    .cert-list { list-style: none; padding: 0; }
+
+    .cert-list li {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text);
+      padding: 0.16rem 0 0.16rem 0.7rem;
+      border-bottom: 1px solid var(--border-dim);
+      position: relative;
+    }
+
+    .cert-list li:last-child { border-bottom: none; }
+
+    .cert-list li::before {
+      content: '■';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.38rem;
+      top: 0.32rem;
+    }
+
+    /* ─────────────── PRINT ─────────────── */
+    @media print {
+      body { background: #fff; color: #111; }
+
+      .page {
+        margin: 0;
+        border: none;
+        max-width: 100%;
+        background: #fff;
+      }
+
+      :root {
+        --bg:          #fff;
+        --panel:       #fff;
+        --card:        #f4f4f6;
+        --border:      #ccc;
+        --border-dim:  #ddd;
+        --accent:      #c41e3a;
+        --orange:      #c45500;
+        --text:        #222;
+        --text-bright: #000;
+        --text-muted:  #666;
+      }
+
+      a { color: var(--accent); text-decoration: none; }
+      .header { break-after: avoid; }
+      .body-grid { break-before: avoid; }
+      .run { break-inside: avoid; }
+      .section { break-inside: avoid; }
+      h2, h3 { break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <div class="runner-name">Hagen Maletzki</div>
+        <div class="runner-archetype">// FIXER &nbsp;·&nbsp; DECKER &nbsp;·&nbsp; IT-ARCHITEKT &nbsp;·&nbsp; IT-DIREKTOR</div>
+      </div>
+      <div class="header-contact">
+        HAMBURG, AGS<br>
+        +49 160 1876723<br>
+        <a href="mailto:Hagen.Maletzki@gmail.com">Hagen.Maletzki@gmail.com</a><br>
+        <a href="https://www.linkedin.com/in/hagen-maletzki-351889205/">linkedin.com/in/hagen-maletzki</a>
+      </div>
+    </div>
+
+    <div class="header-stats">
+      <div class="stat-box">
+        <span class="stat-label">Years Active</span>
+        <div class="stat-value">17+</div>
+        <span class="stat-unit">field experience</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">Max Team Size</span>
+        <div class="stat-value">120</div>
+        <span class="stat-unit">runners under command</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">Contract Value</span>
+        <div class="stat-value">800K</div>
+        <span class="stat-unit">¥ per annum</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">Languages</span>
+        <div class="stat-value">5</div>
+        <span class="stat-unit">DE / EN / JP / FR / SE</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="body-grid">
+  <main class="main">
+
+    <!-- PROFIL -->
+    <section class="section">
+      <div class="section-title">Operative Profile</div>
+      <p class="profile-text">IT-Architekt und Führungskraft mit über zehn Jahren Erfahrung in Systemintegration, Cloud-Migration und dem Aufbau komplexer IT-Landschaften. Hat bei The Quality Group eine heterogene E-Commerce-Architektur — SAP, PIM, WMS, LIMS, ERP, EDI — von Grund auf entworfen und dabei ein Team von 20 auf 120 Mitarbeiter skaliert. Verbindet technische Tiefe mit der Fähigkeit, Strukturen aufzubauen, die ohne permanente Aufsicht funktionieren.</p>
+    </section>
+
+    <!-- FIELD OPERATIONS LOG -->
+    <section class="section">
+      <div class="section-title">Field Operations Log</div>
+
+      <div class="run">
+        <div class="run-header">
+          <div class="run-title-line">
+            <span class="run-title">Projektleiter</span>
+            <span class="run-badge">Prime Run</span>
+          </div>
+          <span class="run-period">01/2025 – ACTIVE</span>
+        </div>
+        <div class="run-corp">DIU MarTech Solutions GmbH &nbsp;·&nbsp; Hamburg, AGS</div>
+        <p class="run-brief">Lead-Verantwortung für die vollständige Neuentwicklung einer produktiven Händlerverwaltungsplattform für einen bedeutenden Automobilkunden — Jahresbudget 800.000 ¥. Ursprünglich als einmonatiger Lift-and-Shift geplant; nach Reverse Engineering als Neuentwicklung von Grund auf neu konzipiert, da tiefe Verflechtung mit einem parallelen Legacy-Monolithen eine Migration ausschloss.</p>
+        <ul class="run-objectives">
+          <li>Parallelbetrieb und Weiterentwicklung eines komplexen Legacy-Monolithen (Angular, PHP/Laminas API Tools, Doctrine ORM 2.x, Pentaho-Integration, Grunt-Build) — während gleichzeitig die Zielarchitektur aufgebaut wurde</li>
+          <li>Entwurf und Aufbau der gesamten Zielarchitektur: Nuxt-Frontend, Django/Python-Backend, ECS-Worker, vollständig auf AWS — inkl. aller Terraform-Infrastruktur für Entwicklungs- und Produktionsumgebungen</li>
+          <li>Aufbau der Datenpipeline: Python-Batch-Import → NDJSON → S3 → SQS-FIFO → ECS-Worker → RDS; Verarbeitung von Millionen Datensätzen täglich</li>
+          <li>DSGVO-konforme Migration von 1,4 TB Produktionsdokumenten (~976.000 PDFs) von On-Premise-NFS zu AWS S3 — null Datenverlust, null Trace</li>
+          <li>Definition und Implementierung der REST-API-Integration zwischen neuer Plattform und Legacy-Monolithen</li>
+          <li>Führungsverantwortung für das gesamte Team von 8 Personen; Mentoring bei Produktionsvorfällen und Architekturentscheidungen</li>
+        </ul>
+      </div>
+
+      <hr class="run-divider">
+
+      <div class="run">
+        <div class="run-header">
+          <div class="run-title-line">
+            <span class="run-title">Deputy CTO</span>
+            <span class="run-badge">Prime Run</span>
+          </div>
+          <span class="run-period">11/2022 – 09/2024</span>
+        </div>
+        <div class="run-corp">The Quality Group &nbsp;·&nbsp; Hamburg, AGS</div>
+        <p class="run-brief">Verantwortung für IT-Architektur und -Strategie eines wachsenden E-Commerce-Unternehmens. Aufbau und Führung einer komplexen Systemlandschaft; Skalierung der IT-Organisation von 20 auf 120 Mitarbeiter inkl. Führungsstrukturen und Karrierepfaden.</p>
+        <ul class="run-objectives">
+          <li>Konzeption und Implementierung der gesamten E-Commerce-Architektur: SAP FI/CO, SD, MM mit SAP BTP, LEA Reply WMS, Datev-Middleware, PIM, PLMS, ORM, LIMS, EDI</li>
+          <li>Skalierung des IT-Teams von 20 auf 120 Mitarbeiter; direkte Führung von 7 Führungskräften</li>
+          <li>Einführung von OKRs und agilen Methoden als unternehmensweitem Steuerungsrahmen</li>
+          <li>Aufbau der Architecture Community of Practice über alle Entwicklungsteams</li>
+        </ul>
+      </div>
+
+      <hr class="run-divider">
+
+      <div class="run">
+        <div class="run-header">
+          <div class="run-title-line">
+            <span class="run-title">Teamleiter</span>
+            <span class="run-badge">Standard</span>
+          </div>
+          <span class="run-period">03/2022 – 10/2022</span>
+        </div>
+        <div class="run-corp">adesso SE &nbsp;·&nbsp; Hamburg, AGS</div>
+        <ul class="run-objectives">
+          <li>Team von null auf 12 Entwickler in neun Monaten aufgebaut</li>
+          <li>Jahresumsatz von 2,5 Mio. ¥ mit 14 % Gewinnmarge erzielt</li>
+          <li>500.000-¥-Projekt für den DMSW pünktlich und im Budget abgeschlossen</li>
+          <li>Trainingsprogramm für Berufs- und Quereinsteiger: Tagessatzsteigerung von 600 ¥ auf 800 ¥ nach sechs Monaten</li>
+        </ul>
+      </div>
+
+      <div class="run" style="margin-top: 0.65rem;">
+        <div class="run-header">
+          <div class="run-title-line">
+            <span class="run-title">Projektleiter</span>
+            <span class="run-badge">Standard</span>
+          </div>
+          <span class="run-period">10/2021 – 02/2022</span>
+        </div>
+        <div class="run-corp">adesso SE &nbsp;·&nbsp; Hamburg, AGS</div>
+        <ul class="run-objectives">
+          <li>Leitung agiler Projekte mit bis zu 12 Mitarbeitern und Budgets im sechsstelligen Bereich</li>
+          <li>Proof of Concept: Migration eines Monolithen auf Microservice-Architektur</li>
+          <li>Agilisierungs-Workshops bei Kunden durchgeführt</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- PRIOR ENGAGEMENTS -->
+    <section class="section">
+      <div class="section-title">Prior Engagements</div>
+      <div class="prior-run"><strong>IT-Architekt</strong> &nbsp;<span class="corp">§ Retail.me</span>&nbsp; (04/2021 – 09/2021): Prozessarchitektur, CI/CD-Strukturen, Führung interner und Offshore-Teams.</div>
+      <div class="prior-run"><strong>Stellvertretender CTO</strong> &nbsp;<span class="corp">§ isa GmbH</span>&nbsp; (07/2020 – 03/2021): Verantwortung für 30 Entwickler, DevOps und Projektmanagement; Recruiting und Gehaltsverhandlungen.</div>
+      <div class="prior-run"><strong>Teamleiter &amp; Senior-Entwickler</strong> &nbsp;<span class="corp">§ isa GmbH / Netfire GmbH</span>&nbsp; (01/2020 – 06/2020): PHP/Symfony, DevOps, Teamführung, Grafana.</div>
+      <div class="prior-run"><strong>PHP-Entwickler</strong> &nbsp;<span class="corp">§ DZH GmbH</span>&nbsp; (01/2014 – 12/2019): Sechs Jahre Kernentwicklung, DMS-Systeme, Grafana-Reporting.</div>
+      <div class="prior-run"><strong>Fachinformatiker</strong> &nbsp;<span class="corp">§ GW IT-Qualitätssicherungsgesellschaft mbH</span>&nbsp; (08/2008 – 09/2013): Server-Infrastruktur, Systemadministration, Skriptentwicklung.</div>
+    </section>
+
+    <!-- NOTABLE OPERATIONS -->
+    <section class="section">
+      <div class="section-title">Notable Operations</div>
+      <div class="project-item">
+        <span class="project-name">SAP-Einführung FI/CO, SD, MM</span><span class="project-period">(06/2023 – 07/2024)</span>
+        <div class="project-desc">Architektur, Implementierung und Integration mit SAP BTP und eigenentwickelter Middleware; Steuerung externer Partner.</div>
+      </div>
+      <div class="project-item">
+        <span class="project-name">SAP–Datev-Anbindung</span><span class="project-period">(11/2023 – 07/2024)</span>
+        <div class="project-desc">Middleware-Entwicklung für Finanzdatenmeldungen; Architekturdesign und Integrationstests.</div>
+      </div>
+      <div class="project-item">
+        <span class="project-name">WMS-Einführung</span><span class="project-period">(01/2023 – 10/2023)</span>
+        <div class="project-desc">Design und Implementierung LEA Reply WMS; vollständige Umstellung der Lagerhaltungssysteme inkl. Budgetverantwortung.</div>
+      </div>
+      <div class="project-item">
+        <span class="project-name">CoP Architecture</span><span class="project-period">(03/2023 – 12/2023)</span>
+        <div class="project-desc">Aufbau und Leitung der Architecture Community of Practice über alle Entwicklungsteams.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <section class="section">
+      <div class="section-title">Programs &amp; Skills</div>
+      <div class="skill-group">
+        <div class="skill-group-label">Architecture</div>
+        <div class="tags">
+          <span class="tag">IT-Architektur</span>
+          <span class="tag">Systemintegration</span>
+          <span class="tag">SAP BTP</span>
+          <span class="tag">Cloud-Migration</span>
+          <span class="tag">Middleware</span>
+          <span class="tag">REST API</span>
+          <span class="tag">Microservices</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Cloud &amp; Ops</div>
+        <div class="tags">
+          <span class="tag">AWS</span>
+          <span class="tag">Azure</span>
+          <span class="tag">Terraform</span>
+          <span class="tag">ECS</span>
+          <span class="tag">S3</span>
+          <span class="tag">SQS</span>
+          <span class="tag">CI/CD</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Leadership</div>
+        <div class="tags">
+          <span class="tag">Teamaufbau</span>
+          <span class="tag">OKRs</span>
+          <span class="tag">Agile</span>
+          <span class="tag">Vendor-Mgmt</span>
+          <span class="tag">Budget</span>
+          <span class="tag">Stakeholder</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Enterprise</div>
+        <div class="tags">
+          <span class="tag">SAP FI/CO</span>
+          <span class="tag">SAP SD/MM</span>
+          <span class="tag">ERP</span>
+          <span class="tag">WMS</span>
+          <span class="tag">EDI</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Backend</div>
+        <div class="tags">
+          <span class="tag">PHP</span>
+          <span class="tag">Python</span>
+          <span class="tag">Java</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Django</span>
+          <span class="tag">Symfony</span>
+          <span class="tag">Laminas</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Frontend</div>
+        <div class="tags">
+          <span class="tag">Angular</span>
+          <span class="tag">Nuxt</span>
+          <span class="tag">Vue.js</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Databases</div>
+        <div class="tags">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">MongoDB</span>
+          <span class="tag">Oracle</span>
+          <span class="tag">MS-SQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Monitoring</div>
+        <div class="tags">
+          <span class="tag">Grafana</span>
+          <span class="tag">Pentaho</span>
+          <span class="tag">Git</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">Language Matrix</div>
+      <div class="lang-item"><span class="lang-name">Deutsch</span><span class="lang-level">Native</span></div>
+      <div class="lang-item"><span class="lang-name">Englisch</span><span class="lang-level">Fluent</span></div>
+      <div class="lang-item"><span class="lang-name">Japanisch</span><span class="lang-level">Advanced</span></div>
+      <div class="lang-item"><span class="lang-name">Französisch</span><span class="lang-level">Basic</span></div>
+      <div class="lang-item"><span class="lang-name">Schwedisch</span><span class="lang-level">Basic</span></div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">Training</div>
+      <div class="edu-item">
+        <strong>Fachinformatiker Anwendungsentwicklung</strong>
+        <span>Geyer &amp; Weinig Unternehmensberatung</span>
+        <span>09/2005 – 08/2008</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">Certifications</div>
+      <ul class="cert-list">
+        <li>SAP Enterprise Architect</li>
+        <li>CCNA 2</li>
+        <li>Penetration Testing</li>
+        <li>IHK Stressmanager</li>
+      </ul>
+    </section>
+
+  </aside>
+  </div>
+
+</div>
+</body>
+</html>
